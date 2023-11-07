@@ -1,52 +1,56 @@
 import { fetchMoviesByQuery } from 'api';
 import { SearchedList } from 'components/SeearchedList/SearchedList';
 import { Field, Form, Formik } from 'formik';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Movies() {
+  const [params, setParams] = useSearchParams();
+  const searchQuery = params.get('search') ?? '';
   const [error, setError] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   const [searchedMovies, setSearchedMovies] = useState([]);
 
-  const handleSearchQuery = query => {
-    setSearchQuery(query);
+  const changeQuery = evt => {
+    params.set('search', evt.target.value);
+    setParams(params);
   };
 
-  useEffect(() => {
+  async function getSearchingMovies() {
+    setSearchedMovies([]);
     if (!searchQuery) return;
-
-    // setSearchedMovies([]);
-    async function getSearchingMovies() {
-      try {
-        setError(false);
-        const searchingMovies = await fetchMoviesByQuery(searchQuery);
-        setSearchedMovies(searchingMovies.results);
-      } catch (error) {
+    try {
+      setError(false);
+      const searchingMovies = await fetchMoviesByQuery(searchQuery);
+      if (searchingMovies.results.length === 0) {
         setError(true);
+        return;
       }
+      setSearchedMovies(searchingMovies.results);
+    } catch (error) {
+      setError(true);
     }
-
-    getSearchingMovies();
-  }, [searchQuery]);
-
-  useEffect(() => {
-    console.log(searchedMovies);
-  }, [searchedMovies]);
+  }
 
   return (
     <div>
       <Formik
-        initialValues={{ search: '' }}
         onSubmit={values => {
-          handleSearchQuery(values.search);
+          getSearchingMovies(values.search);
         }}
       >
         <Form>
-          <Field type="input" name="search" />
-          <button type="submit">Search</button>
+          <Field
+            type="input"
+            name="search"
+            value={searchQuery}
+            onChange={changeQuery}
+          />
+          <button type="button" onClick={getSearchingMovies}>
+            Search
+          </button>
         </Form>
       </Formik>
-      {error && <div>Error!</div>}
+      {error && <div>Films not found!</div>}
       {searchedMovies.length > 0 && (
         <SearchedList searchedMovies={searchedMovies} />
       )}
