@@ -27,7 +27,7 @@ export default function Home() {
     <div>
       <h2>Trending today</h2>
       {trendingList.length > 0 && <TrendingList trendingList={trendingList} />}
-      {error && <div>Error</div>}
+      {error && <div>Error!</div>}
     </div>
   );
 }

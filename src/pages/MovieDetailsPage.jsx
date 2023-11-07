@@ -20,7 +20,7 @@ export default function MovieDetails() {
         const movieDetails = await fetchMovieDetails(movieId);
         setMoviePoster(movieDetails.poster_path);
         setMovieTitle(movieDetails.title);
-        setUserScore(movieDetails.userScore);
+        setUserScore(Math.round(movieDetails.vote_average));
         setOverview(movieDetails.overview);
         setGenres(movieDetails.genre_ids);
       } catch (error) {
@@ -37,7 +37,7 @@ export default function MovieDetails() {
         <div>
           <img src={moviePoster} alt={movieTitle} />
           <h2>{movieTitle}</h2>
-          <p>User Score: {userScore}%</p>
+          <p>User Score: {userScore}/10</p>
           <h4>Overview</h4>
           <p>{overview}</p>
           <h4>Genres</h4>
