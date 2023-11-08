@@ -4,7 +4,7 @@ import { Cast } from './Cast';
 import { Reviews } from './Reviews';
 import { AdditionalInfoContainer, DetailesListLink } from './Additional.styled';
 
-export const Additional = () => {
+export const Additional = ({ currentLocation }) => {
   const { movieId } = useParams();
   const [castActive, setCastActive] = useState(false);
   const [reviewsActive, setReviewsActive] = useState(false);
@@ -16,6 +16,7 @@ export const Additional = () => {
         <DetailesListLink>
           <Link
             to={`/movies/${movieId}/cast`}
+            state={{ from: currentLocation }}
             onClick={() => {
               setCastActive(!castActive);
               setReviewsActive(false);
@@ -27,6 +28,7 @@ export const Additional = () => {
         <DetailesListLink>
           <Link
             to={`/movies/${movieId}/reviews`}
+            state={{ from: currentLocation }}
             onClick={() => {
               setReviewsActive(!reviewsActive);
               setCastActive(false);
