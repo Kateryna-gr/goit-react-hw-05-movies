@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const AdditionalInfoContainer = styled.div`
-  width: 1000px;
+  width: 1020px;
   padding: 16px 24px;
   box-shadow: 0px 0px 5px #75659a;
 `;

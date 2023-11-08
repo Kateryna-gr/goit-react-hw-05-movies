@@ -12,7 +12,7 @@ export const GoBackLink = styled(Link)`
 `;
 
 export const MovieDetailesContainer = styled.div`
-  width: 1000px;
+  width: 1020px;
   margin-top: 16px;
   display: flex;
   flex-direction: row;
@@ -20,6 +20,6 @@ export const MovieDetailesContainer = styled.div`
 `;
 
 export const DetailesContainer = styled.div`
-  width: 800px;
+  width: 720px;
   padding: 16px 40px;
 `;
