@@ -14,10 +14,11 @@ export const MovieDetailes = ({
   genres,
 }) => {
   const location = useLocation();
+  const currentLocation = location.state?.from ?? '/';
 
   return (
     <div>
-      <GoBackLink to={location.state?.from ?? '/'}>Go back</GoBackLink>
+      <GoBackLink to={currentLocation}>Go back</GoBackLink>
       <MovieDetailesContainer>
         {moviePoster && (
           <img
@@ -36,7 +37,7 @@ export const MovieDetailes = ({
         </DetailesContainer>
       </MovieDetailesContainer>
 
-      <Additional />
+      <Additional currentLocation={currentLocation} />
     </div>
   );
 };

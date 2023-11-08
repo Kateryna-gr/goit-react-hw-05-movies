@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { fetchMoviesByQuery } from 'api';
 import { SearchedList } from 'components/SeearchedList/SearchedList';
@@ -30,6 +30,10 @@ export default function Movies() {
       setError(true);
     }
   }
+
+  useEffect(() => {
+    getSearchingMovies();
+  }, []);
 
   return (
     <div>
