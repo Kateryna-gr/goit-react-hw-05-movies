@@ -15,32 +15,29 @@ export default function Movies() {
     setParams(params);
   };
 
-  async function getSearchingMovies() {
-    setSearchedMovies([]);
-    if (!searchQuery) return;
-    try {
-      setError(false);
-      const searchingMovies = await fetchMoviesByQuery(searchQuery);
-      if (searchingMovies.results.length === 0) {
-        setError(true);
-        return;
-      }
-      setSearchedMovies(searchingMovies.results);
-    } catch (error) {
-      setError(true);
-    }
-  }
-
   useEffect(() => {
+    setSearchedMovies([]);
+    async function getSearchingMovies() {
+      if (!searchQuery) return;
+      try {
+        setError(false);
+        const searchingMovies = await fetchMoviesByQuery(searchQuery);
+        if (searchingMovies.results.length === 0) {
+          setError(true);
+          return;
+        }
+        setSearchedMovies(searchingMovies.results);
+      } catch (error) {
+        setError(true);
+      }
+    }
+
     getSearchingMovies();
-  }, []);
+  }, [searchQuery]);
 
   return (
     <div>
-      <SearchBar
-        changeQuery={changeQuery}
-        getSearchingMovies={getSearchingMovies}
-      />
+      <SearchBar changeQuery={changeQuery} />
       {error && <div>Films not found!</div>}
       {searchedMovies.length > 0 && (
         <SearchedList searchedMovies={searchedMovies} />

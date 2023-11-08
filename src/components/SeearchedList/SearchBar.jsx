@@ -2,7 +2,7 @@ import { Field, Form, Formik } from 'formik';
 import { useSearchParams } from 'react-router-dom';
 import { SearchButton, SearchInput } from './SearchBar.styled';
 
-export const SearchBar = ({ changeQuery, getSearchingMovies }) => {
+export const SearchBar = ({ changeQuery }) => {
   const [params, setParams] = useSearchParams();
   const searchQuery = params.get('search') ?? '';
 
@@ -15,7 +15,6 @@ export const SearchBar = ({ changeQuery, getSearchingMovies }) => {
       initialValues={{ input: '' }}
       onSubmit={values => {
         handleSumbit(values.input);
-        getSearchingMovies();
       }}
     >
       <Form>
@@ -25,7 +24,7 @@ export const SearchBar = ({ changeQuery, getSearchingMovies }) => {
             type="input"
             name="input"
             value={searchQuery}
-            onChange={changeQuery}
+            onInput={changeQuery}
           />
         </Field>
         <SearchButton type="submit">Search</SearchButton>
