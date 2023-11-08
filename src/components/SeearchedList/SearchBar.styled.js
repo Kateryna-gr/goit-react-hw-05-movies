@@ -19,6 +19,7 @@ export const SearchInput = styled(Field)`
 
 export const SearchButton = styled.button`
   width: 80px;
+  height: 26px;
   margin-top: 10px;
   cursor: pointer;
   background-color: #f5edf5;
