@@ -1,9 +1,6 @@
-import { Link, useLocation } from 'react-router-dom';
-import { MovieListLink } from './SearchBar.styled';
+import { Link } from 'react-router-dom';
 
 export const SearchedList = ({ searchedMovies }) => {
-  const location = useLocation();
-
   if (searchedMovies.length === 0) {
     return;
   }
@@ -12,11 +9,9 @@ export const SearchedList = ({ searchedMovies }) => {
     <div>
       <ul>
         {searchedMovies.map(movie => (
-          <MovieListLink key={movie.id}>
-            <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-              {movie.title}
-            </Link>
-          </MovieListLink>
+          <li key={movie.id}>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+          </li>
         ))}
       </ul>
     </div>

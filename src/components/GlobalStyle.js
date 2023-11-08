@@ -32,12 +32,6 @@ html {
 
   header {
     position: sticky;
-    top: 0;
-    background-color: #f5edf5;
-    box-shadow: 0px 2px 8px #75659a;
-  }
-
-  h2, h4 {
-    color: #7c5979;
+    box-shadow: 0px 2px 8px #af69b4;
   }
 `;

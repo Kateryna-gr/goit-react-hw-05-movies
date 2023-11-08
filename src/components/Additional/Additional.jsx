@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Cast } from './Cast';
 import { Reviews } from './Reviews';
-import { AdditionalInfoContainer, DetailesListLink } from './Additional.styled';
 
 export const Additional = ({ currentLocation }) => {
   const { movieId } = useParams();
@@ -10,10 +9,10 @@ export const Additional = ({ currentLocation }) => {
   const [reviewsActive, setReviewsActive] = useState(false);
 
   return (
-    <AdditionalInfoContainer>
-      <h4>Additional Information</h4>
+    <div>
+      <p>Additional Information</p>
       <ul>
-        <DetailesListLink>
+        <li>
           <Link
             to={`/movies/${movieId}/cast`}
             state={{ from: currentLocation }}
@@ -24,8 +23,8 @@ export const Additional = ({ currentLocation }) => {
           >
             Cast
           </Link>
-        </DetailesListLink>
-        <DetailesListLink>
+        </li>
+        <li>
           <Link
             to={`/movies/${movieId}/reviews`}
             state={{ from: currentLocation }}
@@ -36,9 +35,9 @@ export const Additional = ({ currentLocation }) => {
           >
             Reviews
           </Link>
-        </DetailesListLink>
+        </li>
       </ul>
       {(castActive && <Cast />) || (reviewsActive && <Reviews />)}
-    </AdditionalInfoContainer>
+    </div>
   );
 };

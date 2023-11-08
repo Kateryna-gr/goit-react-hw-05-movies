@@ -1,7 +1,6 @@
 import { fetchMovieDetailsCredits } from 'api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CastList } from './Additional.styled';
 
 export const Cast = () => {
   const { movieId } = useParams();
@@ -9,10 +8,7 @@ export const Cast = () => {
   const [movieCast, setCMovieCast] = useState([]);
 
   useEffect(() => {
-    if (!movieId) {
-      setError(true);
-      return;
-    }
+    if (!movieId) setError(true);
     if (movieCast.length > 0) return;
 
     async function getMovieCastDetails() {
@@ -32,25 +28,21 @@ export const Cast = () => {
     <div>
       {error && <div>Error!</div>}
       {movieCast.length > 0 && (
-        <CastList>
+        <ul>
           {movieCast.map(cast => (
             <li key={cast.id}>
-              <img
-                src={
-                  cast.profile_path
-                    ? `https://image.tmdb.org/t/p/w500/${cast.profile_path}`
-                    : 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700'
-                }
-                alt={cast.name}
-                width="180"
-              />
-
-              <h4>{cast.name}</h4>
-              <p>Character: <span>{cast.character}</span></p>
-              
+              {cast.profile_path && (
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
+                  alt={cast.name}
+                  width="160"
+                />
+              )}
+              <p>{cast.name}</p>
+              <p>Character: {cast.character}</p>
             </li>
           ))}
-        </CastList>
+        </ul>
       )}
     </div>
   );

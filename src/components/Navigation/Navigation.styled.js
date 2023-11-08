@@ -1,10 +1,10 @@
-import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const Navigation = styled.div`
   display: flex;
   gap: 28px;
-  padding: 16px 60px;
+  padding: 16px 24px;
   font-size: 18px;
 `;
 

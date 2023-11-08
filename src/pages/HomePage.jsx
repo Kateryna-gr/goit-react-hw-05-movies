@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
 import { fetchTrendingMovies } from 'api';
 import { TrendingList } from 'components/TrendingList/TrendingList';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [trendingList, setTrendingList] = useState([]);
