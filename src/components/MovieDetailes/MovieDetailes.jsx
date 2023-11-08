@@ -25,8 +25,7 @@ export const MovieDetailes = ({
             src={`https://image.tmdb.org/t/p/w500/${moviePoster}`}
             alt={movieTitle}
             width="300"
-          />
-        )}
+          />)}
         <DetailesContainer>
           <h2>{movieTitle}</h2>
           <p>User Score: {userScore}/10</p>
