@@ -1,7 +1,7 @@
-import { fetchMovieDetails } from 'api';
-import { Additional } from 'components/Additional/Additional';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { fetchMovieDetails } from 'api';
+import { MovieDetailes } from 'components/MovieDetailes/MovieDetailes';
 
 export default function MovieDetails() {
   const { movieId } = useParams();
@@ -33,23 +33,13 @@ export default function MovieDetails() {
   return (
     <div>
       {error || (
-        <div>
-          {moviePoster && (
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${moviePoster}`}
-              alt={movieTitle}
-              width="300"
-            />
-          )}
-          <h2>{movieTitle}</h2>
-          <p>User Score: {userScore}/10</p>
-          <h4>Overview</h4>
-          <p>{overview}</p>
-          <h4>Genres</h4>
-          <p>{genres.map(genre => genre.name).join(', ')}</p>
-
-          <Additional />
-        </div>
+        <MovieDetailes
+          moviePoster={moviePoster}
+          movieTitle={movieTitle}
+          userScore={userScore}
+          overview={overview}
+          genres={genres}
+        />
       )}
     </div>
   );

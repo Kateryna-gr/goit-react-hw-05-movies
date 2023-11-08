@@ -1,6 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { MovieListLink } from './TrendingList.styled';
 
 export const TrendingList = ({ trendingList }) => {
+  const location = useLocation();
+
   if (trendingList.length === 0) {
     return;
   }
@@ -9,11 +12,11 @@ export const TrendingList = ({ trendingList }) => {
     <div>
       <ul>
         {trendingList.map(movie => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>
-              {movie.title} - {movie.id}
+          <MovieListLink key={movie.id}>
+            <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+              {movie.title}
             </Link>
-          </li>
+          </MovieListLink>
         ))}
       </ul>
     </div>

@@ -11,13 +11,7 @@ export const SearchBar = ({ changeQuery, getSearchingMovies }) => {
   };
 
   return (
-    <Formik
-      initialValues={{ input: '' }}
-      onSubmit={values => {
-        handleSumbit(values.input);
-        getSearchingMovies();
-      }}
-    >
+    <Formik onSubmit={values => handleSumbit(values.input)}>
       <Form>
         <Field as="label">
           Search film:
@@ -28,7 +22,9 @@ export const SearchBar = ({ changeQuery, getSearchingMovies }) => {
             onChange={changeQuery}
           />
         </Field>
-        <SearchButton type="submit">Search</SearchButton>
+        <SearchButton type="button" onClick={getSearchingMovies}>
+          Search
+        </SearchButton>
       </Form>
     </Formik>
   );

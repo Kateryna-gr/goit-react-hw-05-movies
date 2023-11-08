@@ -14,18 +14,18 @@ export const MovieDetailes = ({
   genres,
 }) => {
   const location = useLocation();
-  const currentLocation = location.state?.from ?? '/';
 
   return (
     <div>
-      <GoBackLink to={currentLocation}>Go back</GoBackLink>
+      <GoBackLink to={location.state?.from ?? '/'}>Go back</GoBackLink>
       <MovieDetailesContainer>
         {moviePoster && (
           <img
             src={`https://image.tmdb.org/t/p/w500/${moviePoster}`}
             alt={movieTitle}
             width="300"
-          />)}
+          />
+        )}
         <DetailesContainer>
           <h2>{movieTitle}</h2>
           <p>User Score: {userScore}/10</p>
@@ -36,7 +36,7 @@ export const MovieDetailes = ({
         </DetailesContainer>
       </MovieDetailesContainer>
 
-      <Additional currentLocation={currentLocation} />
+      <Additional />
     </div>
   );
 };
