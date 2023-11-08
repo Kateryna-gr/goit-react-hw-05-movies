@@ -1,9 +1,10 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { MainNav } from './Navigation/Navigation';
 import styled from 'styled-components';
+import { MainNav } from './Navigation/Navigation';
 
 const Container = styled.div`
-  padding: 20px 24px;
+  padding: 20px 40px;
 `;
 
 export const Layout = () => {
@@ -13,7 +14,9 @@ export const Layout = () => {
         <MainNav />
       </header>
       <Container>
-        <Outlet />
+        <Suspense fallback={'Loading...'}>
+          <Outlet />
+        </Suspense>
       </Container>
     </div>
   );

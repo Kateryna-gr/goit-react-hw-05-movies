@@ -1,8 +1,8 @@
-import { fetchMoviesByQuery } from 'api';
-import { SearchedList } from 'components/SeearchedList/SearchedList';
-import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { fetchMoviesByQuery } from 'api';
+import { SearchedList } from 'components/SeearchedList/SearchedList';
+import { SearchBar } from 'components/SeearchedList/SearchBar';
 
 export default function Movies() {
   const [params, setParams] = useSearchParams();
@@ -33,23 +33,10 @@ export default function Movies() {
 
   return (
     <div>
-      <Formik
-        onSubmit={values => {
-          getSearchingMovies(values.search);
-        }}
-      >
-        <Form>
-          <Field
-            type="input"
-            name="search"
-            value={searchQuery}
-            onChange={changeQuery}
-          />
-          <button type="button" onClick={getSearchingMovies}>
-            Search
-          </button>
-        </Form>
-      </Formik>
+      <SearchBar
+        changeQuery={changeQuery}
+        getSearchingMovies={getSearchingMovies}
+      />
       {error && <div>Films not found!</div>}
       {searchedMovies.length > 0 && (
         <SearchedList searchedMovies={searchedMovies} />

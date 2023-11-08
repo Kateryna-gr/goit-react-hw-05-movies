@@ -1,6 +1,7 @@
 import { fetchMovieDetailsReviews } from 'api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ReviewsListItem } from './Additional.styled';
 
 export const Reviews = () => {
   const { movieId } = useParams();
@@ -8,7 +9,10 @@ export const Reviews = () => {
   const [movieReviews, setMovieReviews] = useState([]);
 
   useEffect(() => {
-    if (!movieId) return;
+    if (!movieId) {
+      setError(true);
+      return;
+    }
     if (movieReviews.length > 0) return;
 
     async function getMovieDetails() {
@@ -30,10 +34,10 @@ export const Reviews = () => {
       {movieReviews.length > 0 ? (
         <ul>
           {movieReviews.map(review => (
-            <li key={review.id}>
-              <h4>Author: {review.author}</h4>
+            <ReviewsListItem key={review.id}>
+              <h4>Author: <b>{review.author}</b></h4>
               <p>{review.content}</p>
-            </li>
+            </ReviewsListItem>
           ))}
         </ul>
       ) : (
